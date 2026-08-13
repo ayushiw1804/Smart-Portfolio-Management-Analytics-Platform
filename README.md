@@ -8,7 +8,7 @@ An enterprise-grade **AI-Powered Portfolio Intelligence Platform** built with bi
 
 | Executive Summary Dashboard | AI Risk Analytics & Copilot |
 | :---: | :---: |
-| ![Executive Summary](screenshots/exe_dash.png) | ![Risk Analytics & Copilot](screenshots/risk_analytics.png) |
+| ![Executive Summary](screenshots/exe_dash.png) | ![Risk Analytics & Copilot](screenshots/ai.png) |
 
 ---
 
