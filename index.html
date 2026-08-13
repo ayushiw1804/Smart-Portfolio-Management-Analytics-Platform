@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RM DASHBOARD - AI-Powered Portfolio Intelligence Platform</title>
+
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/copilot.css">
+  <link rel="stylesheet" href="css/pipeline.css">
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <div id="app-container">
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar">
+      <div class="brand-header">
+        <div class="brand-icon">
+          <i class="fas fa-chart-pie"></i>
+        </div>
+        <div class="brand-title-wrap">
+          <h1>RM Dashboard</h1>
+          <div class="brand-subtitle">AI Portfolio Intelligence</div>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <div class="nav-section-title">Views & Analytics</div>
+        <a class="nav-item active" data-tab="executive-tab">
+          <i class="fas fa-columns"></i> Executive Summary
+        </a>
+        <a class="nav-item" data-tab="customer-tab">
+          <i class="fas fa-users"></i> Customer Analytics
+        </a>
+        <a class="nav-item" data-tab="risk-tab">
+          <i class="fas fa-shield-alt"></i> Risk Analytics
+          <span class="nav-badge">482</span>
+        </a>
+        <a class="nav-item" data-tab="churn-tab">
+          <i class="fas fa-sync-alt"></i> Churn Analytics
+        </a>
+        <a class="nav-item" data-tab="rm-tab">
+          <i class="fas fa-user-chart"></i> RM Performance
+        </a>
+        <a class="nav-item" data-tab="loan-tab">
+          <i class="fas fa-filter"></i> Loan Pipeline
+        </a>
+        <a class="nav-item" data-tab="c360-tab">
+          <i class="fas fa-id-card"></i> Customer 360°
+        </a>
+
+        <div class="nav-section-title">AI & Data Engine</div>
+        <a class="nav-item" data-tab="pipeline-tab">
+          <i class="fas fa-bolt"></i> Big Data Stream
+        </a>
+        <a class="nav-item" data-tab="optimization-tab">
+          <i class="fas fa-brain"></i> ML Portfolio Optimizer
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="as-on-date">
+          <i class="fas fa-calendar-alt"></i>
+          <span>Data as on: <strong>31-03-2025</strong></span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Canvas -->
+    <main id="main-content">
+
+      <!-- Top Power BI Toolbar & Slicers -->
+      <header id="top-bar">
+        <div class="header-left">
+          <h2>RM DASHBOARD</h2>
+          <p>Relationship Manager Performance & Portfolio Overview</p>
+        </div>
+
+        <!-- Power BI Slicer Controls -->
+        <div class="slicer-toolbar">
+          <div class="slicer-group">
+            <label class="slicer-label">Date Range</label>
+            <div style="display:flex; gap:4px; align-items:center;">
+              <input type="date" class="slicer-control" value="2024-04-01">
+              <span style="color:var(--text-muted); font-size:0.75rem;">to</span>
+              <input type="date" class="slicer-control" value="2025-03-31">
+            </div>
+          </div>
+
+          <div class="slicer-group">
+            <label class="slicer-label">Branch</label>
+            <select class="slicer-control" id="slicer-branch">
+              <option value="All">All Branches</option>
+              <option value="North Branch">North Branch</option>
+              <option value="South Branch">South Branch</option>
+              <option value="West Branch">West Branch</option>
+              <option value="East Branch">East Branch</option>
+            </select>
+          </div>
+
+          <div class="slicer-group">
+            <label class="slicer-label">RM Name</label>
+            <select class="slicer-control" id="slicer-rm">
+              <option value="All">All RMs</option>
+              <option value="RM A">RM A (Anand)</option>
+              <option value="RM B">RM B (Bhavna)</option>
+              <option value="RM C">RM C (Chetan)</option>
+              <option value="RM D">RM D (Deepak)</option>
+              <option value="RM E">RM E (Esha)</option>
+            </select>
+          </div>
+
+          <div class="slicer-group">
+            <label class="slicer-label">Product</label>
+            <select class="slicer-control" id="slicer-product">
+              <option value="All">All Products</option>
+              <option value="Home Loan">Home Loan</option>
+              <option value="Credit Card">Credit Card</option>
+              <option value="Mutual Funds">Mutual Funds</option>
+              <option value="Insurance">Insurance</option>
+              <option value="Personal Loan">Personal Loan</option>
+            </select>
+          </div>
+
+          <button class="btn-clear-slicers" id="btn-clear-slicers">
+            <i class="fas fa-undo"></i> Clear all slicers
+          </button>
+        </div>
+
+        <div class="header-actions">
+          <button class="btn-theme-toggle" id="btn-theme-toggle" title="Toggle Power BI Theme">
+            <i class="fas fa-adjust"></i> Theme
+          </button>
+          <button class="btn-copilot-trigger" id="btn-copilot-toggle">
+            <i class="fas fa-robot"></i> AI Copilot
+          </button>
+        </div>
+      </header>
+
+      <!-- TAB 1: EXECUTIVE SUMMARY (Image Reference Baseline View) -->
+      <div class="view-container active" id="executive-tab">
+        
+        <!-- Top KPI Cards Row -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-icon-wrapper kpi-icon-customers">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-title">Total Customers</span>
+              <span class="kpi-value" id="kpi-total-cust">12,568</span>
+              <span class="kpi-trend positive"><i class="fas fa-caret-up"></i> 8.3% vs Last Year</span>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon-wrapper kpi-icon-aum">
+              <i class="fas fa-sack-dollar"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-title">Portfolio Value (AUM)</span>
+              <span class="kpi-value" id="kpi-aum">₹ 1,82,45,70,000</span>
+              <span class="kpi-trend positive"><i class="fas fa-caret-up"></i> 11.6% vs Last Year</span>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon-wrapper kpi-icon-revenue">
+              <i class="fas fa-coins"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-title">Revenue Generated</span>
+              <span class="kpi-value" id="kpi-revenue">₹ 42,37,25,000</span>
+              <span class="kpi-trend positive"><i class="fas fa-caret-up"></i> 9.2% vs Last Year</span>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon-wrapper kpi-icon-highrisk">
+              <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-title">High Risk Customers</span>
+              <span class="kpi-value" id="kpi-high-risk">482</span>
+              <span class="kpi-trend negative"><i class="fas fa-caret-up"></i> 15.4% vs Last Year</span>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon-wrapper kpi-icon-churn">
+              <i class="fas fa-user-minus"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-title">Churn Rate</span>
+              <span class="kpi-value" id="kpi-churn-rate">6.85%</span>
+              <span class="kpi-trend positive"><i class="fas fa-caret-down"></i> -1.3% vs Last Year</span>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon-wrapper kpi-icon-calls">
+              <i class="fas fa-phone-alt"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-title">Calls Due Today</span>
+              <span class="kpi-value" id="kpi-calls-due">128</span>
+              <span class="kpi-trend positive"><i class="fas fa-caret-up"></i> 6.7% vs Yesterday</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard Grid Row 1 -->
+        <div class="dashboard-grid">
+          
+          <!-- Revenue Trend (Monthly) -->
+          <div class="visual-card col-5">
+            <div class="visual-header">
+              <div class="visual-title"><i class="fas fa-chart-line" style="color:#2563eb;"></i> Revenue Trend (Monthly)</div>
+            </div>
+            <div class="visual-body">
+              <canvas id="chart-revenue-trend"></canvas>
+            </div>
+            <div class="visual-subtitle">
+              Shows the monthly revenue generated from the customer portfolio. Helps in identifying revenue growth trends and seasonal patterns.
+            </div>
+          </div>
+
+          <!-- Portfolio Distribution by Product -->
+          <div class="visual-card col-3">
+            <div class="visual-header">
+              <div class="visual-title"><i class="fas fa-chart-pie" style="color:#10b981;"></i> Portfolio Distribution by Product</div>
+            </div>
+            <div class="visual-body">
+              <canvas id="chart-product-dist"></canvas>
+              <div class="donut-center-overlay">
+                <div class="donut-center-value">₹ 1.82B</div>
+                <div class="donut-center-label">Total</div>
+              </div>
+            </div>
+            <div class="visual-subtitle">
+              Shows the distribution of total portfolio value across different products. Helps in understanding which products contribute the most.
+            </div>
+          </div>
+
+          <!-- Loan Pipeline (This Year) -->
+          <div class="visual-card col-4">
+            <div class="visual-header">
+              <div class="visual-title"><i class="fas fa-filter" style="color:#f59e0b;"></i> Loan Pipeline (This Year)</div>
+            </div>
+            <div class="visual-body">
+              <div class="funnel-container">
+                <div class="funnel-stage">
+                  <div class="funnel-label">Leads</div>
+                  <div class="funnel-bar leads"><span>Leads</span><span class="funnel-value">2,100</span></div>
+                </div>
+                <div class="funnel-stage">
+                  <div class="funnel-label">Application</div>
+                  <div class="funnel-bar application"><span>Application</span><span class="funnel-value">1,600</span></div>
+                </div>
+                <div class="funnel-stage">
+                  <div class="funnel-label">Verification</div>
+                  <div class="funnel-bar verification"><span>Verification</span><span class="funnel-value">1,200</span></div>
+                </div>
+                <div class="funnel-stage">
+                  <div class="funnel-label">Approved</div>
+                  <div class="funnel-bar approved"><span>Approved</span><span class="funnel-value">980</span></div>
+                </div>
+                <div class="funnel-stage">
+                  <div class="funnel-label">Disbursed</div>
+                  <div class="funnel-bar disbursed"><span>Disbursed</span><span class="funnel-value">850</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="visual-subtitle">
+              Shows the number of customers at each stage of the loan process. Helps in analyzing conversion rate and drop-offs.
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Dashboard Grid Row 2 -->
+        <div class="dashboard-grid" style="margin-top: 20px;">
+          
+          <!-- RM Performance (Revenue) -->
+          <div class="visual-card col-4">
+            <div class="visual-header">
+              <div class="visual-title"><i class="fas fa-bar-chart" style="color:#2563eb;"></i> RM Performance (Revenue)</div>
+            </div>
+            <div class="visual-body">
+              <canvas id="chart-rm-perf"></canvas>
+            </div>
+            <div class="visual-subtitle">
+              Compares revenue generated by each Relationship Manager. Helps in identifying top performers and providing support to others.
+            </div>
+          </div>
+
+          <!-- Risk Distribution (Customers) -->
+          <div class="visual-card col-3">
+            <div class="visual-header">
+              <div class="visual-title"><i class="fas fa-pie-chart" style="color:#ef4444;"></i> Risk Distribution (Customers)</div>
+            </div>
+            <div class="visual-body">
+              <canvas id="chart-risk-dist"></canvas>
+            </div>
+            <div class="visual-subtitle">
+              Shows the distribution of customers based on risk levels. Helps in focusing on high-risk customers for timely actions.
+            </div>
+          </div>
+
+          <!-- Top 10 High Risk Customers Table -->
+          <div class="visual-card col-5">
+            <div class="visual-header">
+              <div class="visual-title"><i class="fas fa-list-ol" style="color:#ef4444;"></i> Top 10 High Risk Customers</div>
+            </div>
+            <div class="visual-body" style="align-items:flex-start; padding-top:0;">
+              <div class="pbi-table-container">
+                <table class="pbi-table">
+                  <thead>
+                    <tr>
+                      <th>Customer Name</th>
+                      <th>Portfolio Value</th>
+                      <th>Risk Score</th>
+                      <th>Prob. Default</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="table-high-risk-body">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="visual-subtitle">
+              Lists the top 10 customers with the highest risk. Helps RM to prioritize follow-ups and risk mitigation.
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Dashboard Grid Row 3 -->
+        <div class="dashboard-grid" style="margin-top: 20px;">
+          
+          <!-- Today's Call Priorities -->
+          <div class="visual-card col-8">
+            <div class="visual-header">
+              <div class="visual-title"><i class="fas fa-phone-volume" style="color:#06b6d4;"></i> Today's Call Priorities</div>
+            </div>
+            <div class="visual-body" style="align-items:flex-start;">
+              <div class="pbi-table-container">
+                <table class="pbi-table">
+                  <thead>
+                    <tr>
+                      <th>Customer Name</th>
+                      <th>Priority</th>
+                      <th>Reason</th>
+                      <th>Portfolio Value</th>
+                      <th>Risk Score</th>
+                      <th>Last Contact</th>
+                      <th>Next Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="table-call-priorities-body">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="visual-subtitle">
+              Customer priority queue for daily follow ups.
+            </div>
+          </div>
+
+          <!-- Churn Rate Trend -->
+          <div class="visual-card col-4">
+            <div class="visual-header">
+              <div class="visual-title"><i class="fas fa-line-chart" style="color:#8b5cf6;"></i> Churn Rate Trend</div>
+            </div>
+            <div class="visual-body">
+              <canvas id="chart-churn-trend"></canvas>
+            </div>
+            <div class="visual-subtitle">
+              Shows the monthly churn rate trend. Helps in evaluating retention strategies effectiveness.
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- TAB 2: BIG DATA STREAMING PIPELINE MONITOR -->
+      <div class="view-container" id="pipeline-tab">
+        <h2 style="font-family:var(--font-heading); margin-bottom:16px;"><i class="fas fa-bolt" style="color:#38bdf8;"></i> Real-Time Big Data Ingestion Stream</h2>
+        
+        <div class="pipeline-stats-grid">
+          <div class="pipeline-card">
+            <span class="pipeline-card-title">Total Events Ingested</span>
+            <span class="pipeline-card-val" id="stream-records-count">4,892,040</span>
+            <span class="pipeline-status-indicator"><span class="status-dot"></span> Kafka Pipeline Active</span>
+          </div>
+
+          <div class="pipeline-card">
+            <span class="pipeline-card-title">Ingestion Velocity</span>
+            <span class="pipeline-card-val" id="stream-rate-val">1,420 req/s</span>
+            <span style="font-size:0.75rem; color:var(--text-muted);">Real-time Spark Cluster</span>
+          </div>
+
+          <div class="pipeline-card">
+            <span class="pipeline-card-title">End-to-End Latency</span>
+            <span class="pipeline-card-val" id="stream-latency-val">14 ms</span>
+            <span style="font-size:0.75rem; color:#10b981;">Sub-50ms SLA Compliant</span>
+          </div>
+
+          <div class="pipeline-card">
+            <span class="pipeline-card-title">Data Schema Quality</span>
+            <span class="pipeline-card-val" style="color:#10b981;">99.8%</span>
+            <span style="font-size:0.75rem; color:var(--text-muted);">Zero schema drift anomalies</span>
+          </div>
+        </div>
+
+        <div class="visual-card col-12">
+          <div class="visual-header">
+            <div class="visual-title"><i class="fas fa-terminal"></i> Live Topic Stream Event Log</div>
+            <div class="pipeline-controls">
+              <button class="btn-stream-ctrl primary" onclick="PipelineStream.startStreaming()"><i class="fas fa-play"></i> Resume Stream</button>
+              <button class="btn-stream-ctrl" onclick="PipelineStream.pauseStreaming()"><i class="fas fa-pause"></i> Pause Stream</button>
+            </div>
+          </div>
+          <div class="pipeline-console" id="pipeline-console-body">
+            <!-- Event stream lines inserted dynamically by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: ML PORTFOLIO OPTIMIZATION ENGINE -->
+      <div class="view-container" id="optimization-tab">
+        <h2 style="font-family:var(--font-heading); margin-bottom:16px;"><i class="fas fa-brain" style="color:#8b5cf6;"></i> Markowitz Efficient Frontier Portfolio Optimizer</h2>
+        
+        <div class="dashboard-grid">
+          <div class="visual-card col-8">
+            <div class="visual-header">
+              <div class="visual-title">Efficient Frontier Risk/Return Curve</div>
+            </div>
+            <div class="visual-body">
+              <canvas id="chart-efficient-frontier"></canvas>
+            </div>
+          </div>
+
+          <div class="visual-card col-4">
+            <div class="visual-header">
+              <div class="visual-title">Optimization Parameters</div>
+            </div>
+            <div class="ml-config-box">
+              <div class="ml-slider-group">
+                <div class="ml-slider-label">
+                  <span>Risk Aversion Factor</span>
+                  <span id="lbl-risk-val">0.50</span>
+                </div>
+                <input type="range" class="ml-slider" min="0.1" max="1.0" step="0.05" value="0.50" oninput="document.getElementById('lbl-risk-val').innerText = this.value; App.renderAllVisuals();">
+              </div>
+
+              <div class="ml-slider-group">
+                <div class="ml-slider-label">
+                  <span>Target Investment Capital</span>
+                  <span>₹ 1,00,00,000</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="background:rgba(255,255,255,0.04); padding:14px; border-radius:8px;">
+              <h4 style="color:#38bdf8; font-size:0.9rem; margin-bottom:6px;">Calculated Optimal Metrics</h4>
+              <p style="font-size:0.85rem;">Expected Annual Return: <strong>14.80%</strong></p>
+              <p style="font-size:0.85rem;">Portfolio Volatility: <strong>11.20%</strong></p>
+              <p style="font-size:0.85rem;">Sharpe Ratio: <strong>1.82</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: CUSTOMER ANALYTICS -->
+      <div class="view-container" id="customer-tab">
+        <h2 style="font-family:var(--font-heading); margin-bottom:16px;"><i class="fas fa-users" style="color:#2563eb;"></i> Customer Analytics & Wealth Tier Overview</h2>
+        
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-icon-wrapper kpi-icon-customers"><i class="fas fa-users"></i></div>
+            <div class="kpi-content">
+              <span class="kpi-title">Total Customers</span>
+              <span class="kpi-value">12,568</span>
+              <span class="kpi-trend positive"><i class="fas fa-caret-up"></i> 93.2% Active</span>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon-wrapper kpi-icon-aum"><i class="fas fa-gem"></i></div>
+            <div class="kpi-content">
+              <span class="kpi-title">HNW Clients (>₹50L)</span>
+              <span class="kpi-value">1,240</span>
+              <span class="kpi-trend positive"><i class="fas fa-caret-up"></i> 38% Total AUM</span>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon-wrapper kpi-icon-revenue"><i class="fas fa-chart-bar"></i></div>
+            <div class="kpi-content">
+              <span class="kpi-title">Avg AUM / Client</span>
+              <span class="kpi-value">₹ 14.52 L</span>
+              <span class="kpi-trend positive"><i class="fas fa-caret-up"></i> ▲ 6.4% YoY</span>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon-wrapper kpi-icon-calls"><i class="fas fa-star"></i></div>
+            <div class="kpi-content">
+              <span class="kpi-title">Net Promoter Score</span>
+              <span class="kpi-value">74 / 100</span>
+              <span class="kpi-trend positive"><i class="fas fa-check-circle"></i> Top Decile</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="visual-card col-6">
+            <div class="visual-header">
+              <div class="visual-title"><i class="fas fa-users-viewfinder"></i> Age Bracket Demographics</div>
+            </div>
+            <div class="visual-body">
+              <div class="pbi-table-container">
+                <table class="pbi-table">
+                  <thead><tr><th>Age Bracket</th><th>Share (%)</th><th>Total Clients</th><th>Status</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>18 - 30 Yrs</strong></td><td>15.0%</td><td>1,885</td><td><span class="badge-score risk-low">Growth</span></td></tr>
+                    <tr><td><strong>31 - 45 Yrs</strong></td><td>42.0%</td><td>5,278</td><td><span class="badge-score risk-low">Prime Peak</span></td></tr>
+                    <tr><td><strong>46 - 60 Yrs</strong></td><td>31.0%</td><td>3,896</td><td><span class="badge-score risk-high">High HNI</span></td></tr>
+                    <tr><td><strong>60+ Yrs</strong></td><td>12.0%</td><td>1,509</td><td><span class="badge-score risk-critical">Estate Planning</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="visual-subtitle">Demographic segmentation across customer portfolio tiers.</div>
+          </div>
+
+          <div class="visual-card col-6">
+            <div class="visual-header">
+              <div class="visual-title"><i class="fas fa-layer-group"></i> Customer Wealth Tiers</div>
+            </div>
+            <div class="visual-body">
+              <div class="pbi-table-container">
+                <table class="pbi-table">
+                  <thead><tr><th>Tier Segment</th><th>Clients</th><th>Total AUM</th><th>Avg Rev/Yr</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>HNI (> ₹50L)</strong></td><td>1,240</td><td>₹ 740 Cr</td><td><strong style="color:#10b981;">₹ 1.85L</strong></td></tr>
+                    <tr><td><strong>Emerging HNI (₹25L-₹50L)</strong></td><td>2,480</td><td>₹ 620 Cr</td><td><strong>₹ 95K</strong></td></tr>
+                    <tr><td><strong>Mass Affluent (₹10L-₹25L)</strong></td><td>4,120</td><td>₹ 380 Cr</td><td><strong>₹ 42K</strong></td></tr>
+                    <tr><td><strong>Retail (< ₹10L)</strong></td><td>4,728</td><td>₹ 84.5 Cr</td><td><strong>₹ 15K</strong></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="visual-subtitle">Categorization of clients by Total Relationship Value (TRV).</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 5: RISK ANALYTICS -->
+      <div class="view-container" id="risk-tab">
+        <h2 style="font-family:var(--font-heading); margin-bottom:16px;"><i class="fas fa-shield-alt" style="color:#ef4444;"></i> Risk Analytics & Stress Testing</h2>
+        
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-icon-wrapper kpi-icon-highrisk"><i class="fas fa-shield-halved"></i></div>
+            <div class="kpi-content">
+              <span class="kpi-title">Risk Exposure</span>
+              <span class="kpi-value">₹ 842.10 Cr</span>
+              <span class="kpi-trend negative">Basel III Standard</span>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon-wrapper kpi-icon-highrisk"><i class="fas fa-exclamation-circle"></i></div>
+            <div class="kpi-content">
+              <span class="kpi-title">High Risk Accounts</span>
+              <span class="kpi-value">482</span>
+              <span class="kpi-trend negative">PD > 70%</span>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon-wrapper kpi-icon-customers"><i class="fas fa-chart-pie"></i></div>
+            <div class="kpi-content">
+              <span class="kpi-title">Avg Portfolio PD</span>
+              <span class="kpi-value">2.84%</span>
+              <span class="kpi-trend positive"><i class="fas fa-check"></i> Below Limit 3.5%</span>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon-wrapper kpi-icon-aum"><i class="fas fa-building-columns"></i></div>
+            <div class="kpi-content">
+              <span class="kpi-title">Capital Adequacy (CAR)</span>
+              <span class="kpi-value">16.4%</span>
+              <span class="kpi-trend positive"><i class="fas fa-shield"></i> Safe Buffer</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="visual-card col-6">
+            <div class="visual-header">
+              <div class="visual-title"><i class="fas fa-list-check"></i> Credit Rating Migration Exposure</div>
+            </div>
+            <div class="visual-body">
+              <div class="pbi-table-container">
+                <table class="pbi-table">
+                  <thead><tr><th>Internal Rating</th><th>Exposure (₹ Cr)</th><th>Share (%)</th><th>Risk Grade</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>AAA</strong></td><td>₹ 320.0 Cr</td><td>38.0%</td><td><span class="badge-score risk-low">Prime</span></td></tr>
+                    <tr><td><strong>AA</strong></td><td>₹ 240.0 Cr</td><td>28.5%</td><td><span class="badge-score risk-low">Low Risk</span></td></tr>
+                    <tr><td><strong>A</strong></td><td>₹ 150.0 Cr</td><td>17.8%</td><td><span class="badge-score risk-high">Moderate</span></td></tr>
+                    <tr><td><strong>BBB</strong></td><td>₹ 75.0 Cr</td><td>8.9%</td><td><span class="badge-score risk-high">Acceptable</span></td></tr>
+                    <tr><td><strong>BB & Below</strong></td><td>₹ 57.1 Cr</td><td>6.8%</td><td><span class="badge-score risk-critical">Watchlist</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="visual-subtitle">Portfolio breakdown by internal risk grades.</div>
+          </div>
+
+          <div class="visual-card col-6">
+            <div class="visual-header">
+              <div class="visual-title"><i class="fas fa-sliders"></i> Macroeconomic Sensitivity Factors</div>
+            </div>
+            <div class="visual-body">
+              <div style="background:rgba(255,255,255,0.04); padding:16px; border-radius:10px; width:100%;">
+                <p style="font-size:0.9rem; margin-bottom:8px;">Interest Rate Shock Scenario: <strong>+150 Bps Hike</strong></p>
+                <p style="font-size:0.9rem; margin-bottom:8px;">Equity Valuation Drop Scenario: <strong>-15% Shock</strong></p>
+                <div style="background:rgba(239,68,68,0.15); border:1px solid #ef4444; padding:12px; border-radius:8px; margin-top:12px;">
+                  <span style="color:#ef4444; font-weight:700; font-size:1.1rem;">Estimated ECL Impact: -₹ 9.42 Cr (-5.16%)</span>
+                </div>
+              </div>
+            </div>
+            <div class="visual-subtitle">Capital impairment projection under adverse macro conditions.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 6: CHURN ANALYTICS -->
+      <div class="view-container" id="churn-tab">
+        <h2 style="font-family:var(--font-heading); margin-bottom:16px;"><i class="fas fa-sync-alt" style="color:#8b5cf6;"></i> Churn Analytics & Retention Triggers</h2>
+        
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-icon-wrapper kpi-icon-churn"><i class="fas fa-user-minus"></i></div>
+            <div class="kpi-content">
+              <span class="kpi-title">Monthly Churn Rate</span>
+              <span class="kpi-value">6.85%</span>
+              <span class="kpi-trend positive"><i class="fas fa-caret-down"></i> -1.3% YoY</span>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon-wrapper kpi-icon-highrisk"><i class="fas fa-user-clock"></i></div>
+            <div class="kpi-content">
+              <span class="kpi-title">At-Risk Clients</span>
+              <span class="kpi-value">314</span>
+              <span class="kpi-trend negative">Prob > 60%</span>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon-wrapper kpi-icon-revenue"><i class="fas fa-hand-holding-dollar"></i></div>
+            <div class="kpi-content">
+              <span class="kpi-title">Revenue at Risk</span>
+              <span class="kpi-value">₹ 18.40 Cr</span>
+              <span class="kpi-trend negative">Annualized</span>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon-wrapper kpi-icon-aum"><i class="fas fa-user-check"></i></div>
+            <div class="kpi-content">
+              <span class="kpi-title">Retention Campaign Save</span>
+              <span class="kpi-value">68.2%</span>
+              <span class="kpi-trend positive"><i class="fas fa-check"></i> High Efficacy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="visual-card col-12">
+          <div class="visual-header">
+            <div class="visual-title"><i class="fas fa-bullseye"></i> Primary Predictive Churn Drivers</div>
+          </div>
+          <div class="visual-body">
+            <div class="pbi-table-container">
+              <table class="pbi-table">
+                <thead><tr><th>Risk Driver Category</th><th>Contribution Share (%)</th><th>Risk Severity Impact</th><th>Mitigation Action</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Low Digital Engagement (<3 visits/yr)</strong></td><td>35.0%</td><td><span class="badge-score risk-critical">High</span></td><td>Assign RM Personal Outreach</td></tr>
+                  <tr><td><strong>High Fee Dissatisfaction</strong></td><td>24.0%</td><td><span class="badge-score risk-critical">High</span></td><td>Offer Fee Tier Re-alignment</td></tr>
+                  <tr><td><strong>Competitor Rate Advantage</strong></td><td>20.0%</td><td><span class="badge-score risk-high">Medium</span></td><td>Match Fixed Deposit Rates</td></tr>
+                  <tr><td><strong>Service Delay Escalations</strong></td><td>15.0%</td><td><span class="badge-score risk-high">Medium</span></td><td>Prioritize Operations Queue</td></tr>
+                  <tr><td><strong>Product Misalignment</strong></td><td>6.0%</td><td><span class="badge-score risk-low">Low</span></td><td>Conduct Wealth Needs Review</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="visual-subtitle">Machine learning feature importance ranking for customer churn likelihood.</div>
+        </div>
+      </div>
+
+      <!-- TAB 7: RM PERFORMANCE -->
+      <div class="view-container" id="rm-tab">
+        <h2 style="font-family:var(--font-heading); margin-bottom:16px;"><i class="fas fa-user-chart" style="color:#2563eb;"></i> RM Performance Leaderboard</h2>
+        
+        <div class="visual-card col-12">
+          <div class="visual-header">
+            <div class="visual-title"><i class="fas fa-trophy" style="color:#f59e0b;"></i> Relationship Manager Sales & Target Achievement Leaderboard</div>
+          </div>
+          <div class="visual-body">
+            <div class="pbi-table-container">
+              <table class="pbi-table">
+                <thead><tr><th>Rank & RM Name</th><th>Branch Location</th><th>Actual Revenue</th><th>Assigned Target</th><th>Achievement Rate</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>#1 RM A (Anand Sharma)</strong></td><td>North Branch</td><td>₹ 9.80 M</td><td>₹ 8.50 M</td><td><span class="badge-score risk-low">115.3%</span></td></tr>
+                  <tr><td><strong>#2 RM B (Bhavna Patel)</strong></td><td>South Branch</td><td>₹ 7.60 M</td><td>₹ 7.00 M</td><td><span class="badge-score risk-low">108.6%</span></td></tr>
+                  <tr><td><strong>#3 RM C (Chetan Singh)</strong></td><td>West Branch</td><td>₹ 6.40 M</td><td>₹ 6.50 M</td><td><span class="badge-score risk-high">98.5%</span></td></tr>
+                  <tr><td><strong>#4 RM D (Deepak Verma)</strong></td><td>East Branch</td><td>₹ 4.90 M</td><td>₹ 5.50 M</td><td><span class="badge-score risk-high">89.1%</span></td></tr>
+                  <tr><td><strong>#5 RM E (Esha Gupta)</strong></td><td>North Branch</td><td>₹ 3.70 M</td><td>₹ 4.00 M</td><td><span class="badge-score risk-high">92.5%</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="visual-subtitle">Relationship Manager revenue tracking and target achievement rates.</div>
+        </div>
+      </div>
+
+      <!-- TAB 8: LOAN PIPELINE -->
+      <div class="view-container" id="loan-tab">
+        <h2 style="font-family:var(--font-heading); margin-bottom:16px;"><i class="fas fa-filter" style="color:#f59e0b;"></i> Loan Pipeline Breakdown</h2>
+        
+        <div class="visual-card col-12">
+          <div class="visual-header">
+            <div class="visual-title"><i class="fas fa-chart-pie"></i> Loan Product Portfolio Mix</div>
+          </div>
+          <div class="visual-body">
+            <div class="pbi-table-container">
+              <table class="pbi-table">
+                <thead><tr><th>Loan Product Type</th><th>Pipeline Value</th><th>Volume Share (%)</th><th>Avg Ticket Size</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Home Loans</strong></td><td>₹ 166.6 Cr</td><td>52.0%</td><td>₹ 45.0 Lakhs</td></tr>
+                  <tr><td><strong>Personal Loans</strong></td><td>₹ 70.5 Cr</td><td>22.0%</td><td>₹ 6.5 Lakhs</td></tr>
+                  <tr><td><strong>Business Loans</strong></td><td>₹ 57.7 Cr</td><td>18.0%</td><td>₹ 28.0 Lakhs</td></tr>
+                  <tr><td><strong>Auto Loans</strong></td><td>₹ 25.7 Cr</td><td>8.0%</td><td>₹ 12.0 Lakhs</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="visual-subtitle">Pipeline value split across retail and commercial lending products.</div>
+        </div>
+      </div>
+
+      <!-- TAB 9: CUSTOMER 360 -->
+      <div class="view-container" id="c360-tab">
+        <h2 style="font-family:var(--font-heading); margin-bottom:16px;"><i class="fas fa-id-card" style="color:#06b6d4;"></i> Customer 360° Profile Lookup</h2>
+        
+        <div class="visual-card col-12">
+          <div class="visual-header">
+            <div class="visual-title"><i class="fas fa-user-gear"></i> High Priority Customer Overview - Amit Verma (CUST-109284)</div>
+          </div>
+          <div class="visual-body" style="display:block;">
+            <p>Portfolio AUM: <strong style="color:#10b981;">₹ 28,45,000</strong> | Assigned RM: <strong>RM A (North Branch)</strong></p>
+            <p>Risk Score: <span class="badge-score risk-critical">92/100</span> | Probability of Default: <strong style="color:#ef4444;">89%</strong></p>
+            <div style="background:rgba(255,255,255,0.04); padding:14px; border-radius:8px; margin-top:12px;">
+              <h4 style="color:#38bdf8;">AI Recommended Action Plan:</h4>
+              <p style="font-size:0.88rem;">1. Initiate urgent risk mitigation dialogue regarding high revolving credit card utilization.</p>
+              <p style="font-size:0.88rem;">2. Propose loan restructuring with 12-month tenure extension to lower EMI burden.</p>
+            </div>
+          </div>
+          <div class="visual-subtitle">Integrated 360-degree customer intelligence record.</div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- AI Copilot Slide-out Drawer -->
+    <div id="copilot-drawer">
+      <div class="copilot-header">
+        <div class="copilot-title-group">
+          <div class="copilot-avatar">
+            <i class="fas fa-robot"></i>
+          </div>
+          <div>
+            <h3>AI Copilot</h3>
+            <p>Investment & Portfolio Assistant</p>
+          </div>
+        </div>
+        <button class="btn-close-copilot" id="btn-close-copilot"><i class="fas fa-times"></i></button>
+      </div>
+
+      <div class="copilot-body" id="copilot-messages">
+        <div class="chat-message system">
+          <div class="chat-bubble">
+            👋 Welcome to <strong>AI Copilot</strong>! I can assist you with real-time portfolio optimization, risk scoring, forecasting revenue, and drafting customer call scripts.
+            <div class="copilot-suggestions">
+              <span class="chip-suggestion">Which RMs are top performers?</span>
+              <span class="chip-suggestion">Optimize portfolio for Amit Verma</span>
+              <span class="chip-suggestion">Forecast revenue for Q3 2025</span>
+              <span class="chip-suggestion">Show high risk accounts</span>
+            </div>
+          </div>
+          <div class="chat-meta">AI Copilot • Just now</div>
+        </div>
+      </div>
+
+      <div class="copilot-footer">
+        <div class="copilot-input-wrap">
+          <input type="text" id="chat-input" placeholder="Ask AI Copilot anything about portfolios...">
+          <button class="btn-send-chat" id="btn-send-chat"><i class="fas fa-paper-plane"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating AI Copilot Trigger Button -->
+    <div id="copilot-floating-btn" title="Open AI Copilot">
+      <i class="fas fa-robot"></i>
+    </div>
+
+    <!-- Customer 360° Modal -->
+    <div id="modal-backdrop" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.6); z-index:150;"></div>
+    <div id="customer-modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:var(--bg-sidebar); border:1px solid var(--border-highlight); width:520px; max-width:90vw; padding:24px; border-radius:16px; box-shadow:0 20px 40px rgba(0,0,0,0.5); z-index:160;">
+      <button id="btn-close-modal" style="position:absolute; top:16px; right:16px; background:none; border:none; color:var(--text-muted); font-size:1.2rem; cursor:pointer;"><i class="fas fa-times"></i></button>
+      <div id="customer-modal-content"></div>
+    </div>
+
+  </div>
+
+  <!-- Core JavaScript Libraries -->
+  <script src="js/data.js"></script>
+  <script src="js/ml_engine.js"></script>
+  <script src="js/pipeline_stream.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/copilot.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
