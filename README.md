@@ -53,10 +53,10 @@ Simply open `index.html` in any web browser (Chrome, Edge, Firefox, Safari):
 Simulated Kafka & Spark streaming event log emitting live stock ticks, customer deposit transactions, portfolio AUM re-indexing, and credit default alerts at ~1,420 req/s with sub-50ms latency.
 
 ### 3. Machine Learning Engines
-- **Markowitz Efficient Frontier**: Quadratic risk-aversion portfolio optimizer.
-- **Default Probability Model**: Credit risk PD scoring engine (0-100 score & PD %).
-- **Holt-Winters Time-Series Forecaster**: Projections up to Q4 2025.
-- **Macroeconomic Stress Testing**: Interest rate hikes (+Bps) & equity crash simulator.
+- **Linear Regression**: Predictive model for portfolio returns, AUM growth, and revenue forecasting.
+-**Logistic Regression**: Binary classification model for default and customer churn probability.
+-**Random Forest / XGBoost Classifier**: Risk classification engine categorizing customers into Low, Medium, and High risk.
+-**K-Means Clustering**: Customer/investor segmentation based on portfolio size, risk profile, returns, and investment behavior.
 
 ### 4. Integrated AI Copilot
 Slide-out conversational assistant capable of answering natural language queries, running client portfolio optimizations, generating customer call scripts, and diagnosing risk drivers.
